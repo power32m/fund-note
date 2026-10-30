@@ -1,5 +1,17 @@
 # 更新记录 / Changelog
 
+## Edge 1.1.2 (2026-10-30)
+
+- 新增本地分时走势，同日统一比例，零线居中，当日范围只扩大不缩小。
+- 10分钟以内的小缺口实线衔接，悬停披露缺失时段，不生成虚假点位。
+- 修正后台定时重复创建及60秒临界跳过问题；保留手动冷却。
+- 自愿打赏、本地CSV备份；简体中文和英文商店配置。
+- 此1.1.2包包含此前本地1.1.3—1.1.5迭代的修正，按作者要求统一版本号。
+
+Shared zero-centered intraday scale, solid short-gap connectors with honest gap tooltips, background alarm/cooldown timing fixes, optional support and bilingual store metadata. This consolidated 1.1.2 includes fixes previously labeled 1.1.3–1.1.5 in local iterations.
+
+
+
 ## Chrome 1.0 测试版 / test build — 1.0.0 (2026-10-30)
 
 - Popup小笺与完整持仓视图；基金行情日收益、确认资产和持仓收益。

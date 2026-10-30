@@ -1,63 +1,69 @@
-# Illustrated Chrome guide
+# Fund Note — User guide
 
-[Project overview](../README.en.md) · [简体中文](CHROME.zh-CN.md)
+Version: Edge 1.1.2. Screenshots use demo data. Store publication status is not implied. The UI is Chinese.
 
-Version: Chrome 1.0 test build (1.0.0). Screenshots use fictional codes such as 990001 and synthetic prices. Do not enter these example codes as real holdings.
+## Install and open
 
-## 1. Install and pin
+After publication, use the official Microsoft Edge Add-ons listing to select Get and confirm installation. Show Fund Note in the browser toolbar, then click its icon. There is no store installation link yet. The first launch contains no holdings and requires no application account. Clicking outside the popup closes it; the full-view button opens a separate tab.
 
-Download `FundNote-Chrome-1.0.0-test.zip` from the [release](https://github.com/power32m/fund-note/releases/tag/chrome-v1.0.0-test), verify its checksum and extract it. Open `chrome://extensions` → Developer mode → Load unpacked → select the **chrome-extension** directory, not the ZIP or its parent directory.
+## Add holdings
 
-Pin Fund Note through Chrome's extensions menu. A fresh installation has no holdings. Chrome 127 or later is required. Keep the extracted directory in place.
+Select 添加持仓 (Add holding). Enter a six-digit off-exchange fund code, the number of units held, and cost per unit. Units are not the investment amount, and cost is not the total purchase amount. ETF feeder funds are supported when quote data is available; this is not an exchange-traded stock trading tool. Blank or zero cost is treated as unknown. The 990001-series screenshot codes are fictional and should not be entered as real funds.
 
-## 2. Add holdings
+![Add a holding](images/07-add.png)
 
-Choose “添加持仓” (Add holding). Enter a six-digit fund code, units and cost per unit, then save. An unknown cost can be left blank: total holding return will be unavailable, while quote-day return can still be calculated from units when quotes are available. Not every fund has intraday estimates.
+## Understand returns
 
-<img src="images/chrome-add.png" width="600" alt="Add-holding form with a fictional fund code">
+The popup emphasizes the displayed quote day's indicative return and each fund's daily return and percentage. Total assets are shown separately. When today's data is unavailable, the latest valid quote day is explicitly identified. Returns from different dates are not combined; a partial total includes only eligible funds. Indicative values may differ from confirmed NAV and platform settlement.
 
-## 3. Read the popup and toolbar badge
+![Popup](images/01-popup.png)
 
-The large number is quote-day return; confirmed assets appear on the right. Each row shows that fund's daily return and percentage. Clicking outside closes the popup; click the icon to reopen it.
+The toolbar badge uses white digits on red for gains, green for losses and gray for zero. It shows the rounded absolute amount without a sign or decimals. Hover over the icon for the signed amount, quote date and update time. In full view, holding return is measured against the entered cost and differs from daily return. There is no comprehensive transaction, dividend or fee ledger.
 
-<img src="images/chrome-popup.png" width="600" alt="Popup showing a synthetic portfolio">
+## Read the intraday preview
 
-The original blue icon has a native badge: red background for profit, green for loss. White digits show the rounded absolute amount, without signs or decimals. Hover for the signed amount, quote date and update time. No available return means no numeric badge. For partial coverage, check the popup and tooltip.
+The 200×40 chart beside each fund reuses existing estimate responses. It retains at most one point per minute; a newer source timestamp can replace that minute's point. A fresh point is not guaranteed every minute. Fewer than three points displays 采集中 (Collecting).
 
-Before today's quotes arrive, “最近行情日收益” means returns for the latest available quote day, with its date shown. Returns from different dates are never combined.
+![Chart hover](images/02-hover.png)
 
-## 4. Expand indices and refresh
+Collection starts after enabling the feature; earlier history is not backfilled. Browser shutdown, sleep, network failure or unavailable estimates can leave gaps. The 11:30–13:00 lunch break is compressed and connected; effective gaps over five and up to ten minutes use solid connectors, while longer gaps stay blank. Hovering over a gap shows the missing interval without an inferred return. Future portions of the daily axis remain empty. Holdings for the same quote day share a zero-centered scale, starting at ±1% and expanding in whole percentage points without shrinking that day. Different dates use separate scales. Hover for time and percentage.
 
-Hover over the bottom ticker for one second to expand a compact two-column panel. It fades out on pointer exit. Red means up and green means down; update flashes indicate a change from the previous fetched price.
+Up to five collected quote days are retained, with cleanup on loading or writing and an additional storage cap. These are collected days, not five calendar days. Deleting a holding removes its chart history. CSV exports do not contain chart history.
 
-<img src="images/chrome-markets.png" width="600" alt="Expanded index panel with synthetic prices">
+## Edit and manage
 
-Use the top-right refresh button or click the quote time. They share a ten-second cooldown. Confirmed NAV has its own cache/request interval, so repeated clicks may not fetch new figures.
+Open full view for units, cost, NAV, estimates and holding returns. Select 修改 (Modify) before editing units or cost, then 保存 (Save) or 取消 (Cancel). Row actions can also be revealed by swiping left. If another page has already changed the holdings, refresh before editing to avoid overwriting newer data. Check the fund name before deletion and export a backup before important changes.
 
-## 5. Edit or delete in the detailed view
+![Full view](images/03-detail.png)
 
-The top-right list button opens the detailed view in a new tab. Click “修改” (Edit) before changing units or cost, then “保存” (Save), or “取消” (Cancel). Enter saves; Esc cancels. Dragging a row left reveals actions; right-side buttons are also available. Delete and Clear ask for confirmation.
+![Edit mode](images/04-edit.png)
 
-![Detailed portfolio view with fictional holdings](images/chrome-detail.png)
+## Indices and refresh
 
-![Editing units and cost after choosing Edit](images/chrome-edit.png)
+The bottom ticker expands into a two-column index panel after one second of hovering and fades when the pointer leaves. Red indicates a rise and green a fall. A brief update flash reflects the change since the previous fetch.
 
-When multiple pages are open, a stale page cannot overwrite a newer saved portfolio. If a conflict message appears, reopen the page and check the latest values before editing.
+![Index panel](images/05-markets.png)
 
-## 6. Import, export and restore CSV
+Use the refresh button or the quote-time area to request an update. Caching, request merging and cooldowns prevent repeated clicks from generating unlimited requests. Automatic refresh adapts to market sessions and page state; polling does not guarantee real-time source data.
 
-Choose “CSV与设置” (CSV & settings) at the bottom of the popup. Import/export is also available below the detailed table.
+## CSV and recovery
 
-![CSV settings and local snapshots](images/chrome-settings.png)
+Open CSV与设置 (CSV and settings) to export holdings. Keep the file private: it includes fund codes, names, units and costs. Import validates the file and displays a preview; confirmation replaces the current holdings rather than appending them. Export the existing holdings first and preserve leading zeros in codes.
 
-- **Export:** download the current holdings as CSV with columns 基金代码 (code), 基金名称 (name), 份额 (units), 成本价 (cost per unit).
-- **Import:** select a CSV, review the validated preview and confirm replacement. Invalid files do not overwrite holdings.
-- **Restore:** download a snapshot from “最近的自动备份” (Recent automatic backups), then import that CSV. Up to ten pre-edit snapshots are kept.
+![CSV and backups](images/06-settings.png)
 
-UTF-8, UTF-16LE and common GB encodings are supported; exports use UTF-8 with BOM. Leading zeros are preserved, and extra quote columns from desktop CSV exports are ignored. CSV contains portfolio information: do not attach it to public issues or distribution packages.
+Up to ten local pre-edit snapshots can be downloaded as CSV and imported for recovery. An empty snapshot contains no holdings to recover. No cloud sync is used. Uninstalling, clearing extension data or changing browser profiles can remove access to data. Export before moving from an unpacked build to a store build: their extension IDs may differ, so automatic migration should not be assumed.
 
-## 7. Update, uninstall and migrate
+## Optional support and privacy
 
-Export a CSV first. Close extension pages, replace runtime files in the original installation directory, and click Reload at `chrome://extensions`. Updating the same unpacked directory preserves data; do not uninstall first. A future store build may have another ID and require CSV migration.
+点击打赏 (Support) displays the author's WeChat payment QR code. Support is voluntary and does not unlock features. The extension neither initiates a payment nor reads payment results. Close with the close button, Escape or the backdrop; check recipient details in the payment platform yourself.
 
-Uninstalling clears extension-local holdings and snapshots. Desktop and Chrome data are separate; transfer through CSV. Read [Privacy](../PRIVACY.md) and [Security](../SECURITY.md).
+Holdings, costs, backups and charts stay in local extension storage. Quote requests send necessary fund/index codes and fixed parameters to third-party providers, not entered units or costs. Providers may receive IP addresses and connection metadata. Refer to the release privacy policy.
+
+## Troubleshooting
+
+A dash indicates unavailable data, not a zero return. Check the code, network, date and estimate availability. Collecting requires three valid points and does not backfill history. An unchanged value may reflect a cooldown, a closed market or an unchanged source quote.
+
+After an extension update, an unsupported-operation error may indicate an old background worker with a newer page. Export a backup, restart/reload the extension in the browser's extension manager, and reopen the popup. The in-app quote refresh does not reload the extension itself.
+
+For return differences, verify units, per-unit cost, NAV date, dividends and fees against your platform. Confirmed fund-company and platform records prevail. Feedback: https://github.com/power32m/fund-note/issues . Do not post holdings, CSV files, account or payment details. This is a personal information tool, not investment advice; availability, real-time accuracy and returns are not guaranteed.

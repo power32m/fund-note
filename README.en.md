@@ -1,58 +1,45 @@
 # Fund Note · 基金小笺
 
-[简体中文](README.md) · [Download 1.0 test build](https://github.com/power32m/fund-note/releases/tag/chrome-v1.0.0-test) · [Illustrated guide](docs/CHROME.en.md) · [Privacy](PRIVACY.md)
+[简体中文](README.md) · [Download 1.1.2](https://github.com/power32m/fund-note/releases/tag/edge-v1.1.2) · [Illustrated guide](docs/CHROME.en.md) · [Privacy](PRIVACY.md)
 
-**A compact Chrome popup for fund holdings and indicative returns for the latest available quote day.**
+A compact popup for fund holdings, quote-day returns and locally collected intraday estimates.
 
-Fund Note is an independently developed Chrome extension with a popup, a detailed portfolio view and CSV import/export. Holdings stay in local browser storage; no application account is required.
+Current package: **Edge 1.1.2**. The UI is Chinese; store materials and documentation are bilingual. Tested in an isolated Edge 156 environment. An earlier submission entered Edge review; current store review/publication status must be checked in Partner Center. This GitHub download does not imply store approval. Not listed in the Chrome Web Store.
 
-Current version: **Chrome 1.0 test build (1.0.0)**. The UI is in Chinese, with Chinese and English documentation. It is **not listed in the Chrome Web Store**; this build is loaded in developer mode.
-
-This repository hosts documentation, screenshots and release downloads. **The application is proprietary, and its source is not published here.** Installed extension resources can be inspected; that does not grant an open-source license.
-
-> Quotes and estimates are for reference only, not investment advice. Fund managers' and trading platforms' confirmed information takes precedence. Third-party services may be delayed, interrupted or discontinued. No real-time availability, long-term availability or ongoing maintenance is promised. Read the [disclaimer](DISCLAIMER.en.md) and [download safety notes](SECURITY.md).
+This repository contains documentation, demo screenshots and release packages, not application source code. The application is proprietary; installed extension resources are inspectable, without granting an open-source license.
 
 ## Preview
 
-These are captures of the extension pages using fictional funds and synthetic fund/index prices. They do not show anyone's actual holdings or investment performance.
+Screenshots use fictional holdings and market data, not actual investment results.
 
-<img src="docs/images/chrome-popup.png" width="600" alt="Popup with a synthetic portfolio, quote-day returns and confirmed assets">
+<img src="docs/images/01-popup.png" width="600" alt="Demo holdings and shared-scale charts">
 
-![Detailed view with synthetic units, costs, NAVs and holding returns](docs/images/chrome-detail.png)
+![Detailed portfolio](docs/images/03-detail.png)
 
 ## Features
 
-- **Compact popup:** quote-day total return, per-fund daily return and percentage, with confirmed assets shown separately. Space for three funds by default; larger portfolios grow and then scroll.
-- **Native toolbar badge:** the original icon stays visible. A red background means profit; green means loss. White digits show the rounded absolute amount. Hover for the signed amount, quote date and update time. The badge and popup share the same calculations.
-- **Detailed portfolio view:** inspect units, cost per unit, confirmed and estimated NAV, and holding returns. Choose “修改” (Edit) before changing values, then save or cancel.
-- **Index ticker:** a single scrolling row expands into a compact two-column panel after a one-second hover and fades out when the pointer leaves.
-- **CSV and backups:** imports are validated and previewed before replacement. Up to ten pre-edit snapshots are stored locally and can be downloaded as CSV.
-- **Controlled refresh:** market-session scheduling, shared caches, request deduplication and manual refresh cooldowns.
+- Popup quote-day returns and assets, plus full-view units/cost management.
+- Native integer badge: red background for gains, green for losses, white digits. Hover for signed amount and date.
+- At most one valid estimate point per minute. Holdings for the same date share a zero-centered scale, starting at ±1% and expanding without shrinking that day, including after restart. Different dates have separate scales.
+- Lunch break compressed. Effective trading-time intervals up to ten minutes connect with a solid line; longer gaps stay blank. Gap tooltips disclose missing data without inferred percentages. No synthetic points are stored.
+- One-second hover index panel, CSV validation/preview before replacement, and up to ten local pre-edit snapshots.
+- Session-aware refresh. Background wake-ups reuse the alarm; automatic one-minute polling allows five seconds of timing tolerance. Manual cooldowns remain strict.
+- Optional WeChat support QR display, with no payment initiation or payment-result access. No payment unlocks features.
 
-## Download and install
+## Install and update
 
-1. Open the [Chrome 1.0 test release](https://github.com/power32m/fund-note/releases/tag/chrome-v1.0.0-test). Download **FundNote-Chrome-1.0.0-test.zip** and **SHA256SUMS.txt**.
-2. [Verify the SHA256](SECURITY.md), extract the ZIP, and keep the extracted directory in place.
-3. In **Chrome 127 or later**, open `chrome://extensions` and enable Developer mode.
-4. Choose “Load unpacked” and select the extracted **chrome-extension** directory.
-5. Pin Fund Note from Chrome's extensions menu, open it, and enter your own fund codes, units and cost per unit.
+Download 基金小笺-Edge-1.1.2.zip and SHA256SUMS.txt from the [Release](https://github.com/power32m/fund-note/releases/tag/edge-v1.1.2). Verify the hash, extract, open edge://extensions, enable developer mode and choose Load unpacked. Select the folder directly containing manifest.json. Fresh installs are empty and need no application account.
 
-A fresh installation has no holdings. To update an existing unpacked installation, replace the runtime files in the same directory and click Reload; **do not uninstall first**. A future store build may have a different extension ID, so export CSV before migration.
+Export CSV before updating. For an existing unpacked installation, retain the directory, replace runtime files and reload; do not uninstall first. A different extension ID, browser or profile may require CSV migration. Automatic GitHub Source code archives contain documentation only and cannot be installed. The 1.0 package remains historical.
 
-GitHub's automatic **Source code (zip/tar.gz)** archives contain only this documentation repository and are not installable extension packages. See the [illustrated guide](docs/CHROME.en.md).
+## Limits and privacy
 
-## Return calculations and refresh
+Indicative values may differ from confirmed fund/platform records. Latest-valid-day returns are dated, and different dates are not mixed. No comprehensive transaction/dividend/fee ledger, trading or investment recommendations are provided.
 
-Quote-day return and total holding return are different measures. Daily return is estimated from units and the day's NAV change; confirmed assets and holding returns use the latest confirmed NAV. Intraday estimates may differ from final figures. Cost precision, dividends, fees, FX and platform methods may also produce differences. The extension does not maintain full transaction/dividend/fee records or execute trades.
+Charts begin with received data, keep up to five collected days subject to a storage cap, and do not backfill history. Solid connectors across short gaps do not represent observed intermediate quotes. Sleep, shutdown, network failures and unavailable estimates can leave gaps. Foreground active-session polling is typically 15 seconds; background checks are typically one minute. Polling does not guarantee source updates, real-time accuracy, continuous availability or ongoing maintenance.
 
-Before today's quotes arrive, the popup explicitly shows returns for the latest available quote day. It switches back when today's data arrives and never combines returns from different dates. Missing data is indicated. The badge omits signs and decimals; hover or open the popup for the signed amount. Long amounts are limited by Chrome's badge space.
+Holdings, costs, charts and backups remain local, with no cloud sync, analytics or advertising tracking. Quote requests send codes and necessary parameters, not entered units or costs; providers may receive connection metadata such as IP addresses. Uninstalling clears local data; keep exported CSV private.
 
-During active sessions, visible pages typically attempt refreshes every 15 seconds and the background every 60 seconds; intervals increase outside sessions. Manual estimate/index refreshes have a 10-second cooldown. Confirmed NAV normally has a five-minute cache and at least a 60-second manual interval. These are request intervals, not provider update guarantees. Browser sleep, shutdown and networking can delay updates. The exchange calendar covers 2026, with weekday/session fallback in later years.
+[Privacy](PRIVACY.md) · [Disclaimer](DISCLAIMER.en.md) · [Download safety](SECURITY.md) · [License](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Changelog](CHANGELOG.md)
 
-## Privacy, support and license
-
-Holdings, caches and snapshots use `chrome.storage.local`. There is no author-operated account, portfolio-sync, advertising or telemetry service. Quote requests send fund/index codes, not units or costs; providers can still receive IP addresses and ordinary connection metadata. CSV files contain holdings: do not attach them to public issues. Uninstalling removes local extension data; export first. See [Privacy](PRIVACY.md).
-
-Report issues through [GitHub Issues](https://github.com/power32m/fund-note/issues), including extension/Chrome versions, reproduction steps and redacted screenshots. See [Security](SECURITY.md) for sensitive reports. Chrome and desktop data are separate. This extension contains no payment QR code, Windows tray, desktop pinning or startup integration.
-
-Author: 无痛穿耳 / power32m. See the [proprietary distribution notice](LICENSE), [third-party notices](THIRD_PARTY_NOTICES.md) and [changelog](CHANGELOG.md).
+[Feedback](https://github.com/power32m/fund-note/issues): do not post holdings, account or payment information. Author: 无痛穿耳 / power32m.
