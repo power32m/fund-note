@@ -29,7 +29,7 @@
 
 ## 下载与更新
 
-1. 从[Release](https://github.com/power32m/fund-note/releases/tag/edge-v1.1.2)下载 基金小笺-Edge-1.1.2.zip 和 SHA256SUMS.txt。
+1. 从[Release](https://github.com/power32m/fund-note/releases/tag/edge-v1.1.2)下载 FundNote-Edge-1.1.2.zip 和 SHA256SUMS.txt。
 2. 核对SHA256后解压，在Edge扩展管理页 edge://extensions 开启开发者模式，选择“加载解压缩的扩展”，选中直接包含manifest.json的目录。
 3. 在工具栏打开基金小笺，添加自己的6位场外基金代码、份额和每份成本。首次安装为空持仓。
 

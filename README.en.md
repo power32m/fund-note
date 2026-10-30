@@ -28,7 +28,7 @@ Screenshots use fictional holdings and market data, not actual investment result
 
 ## Install and update
 
-Download 基金小笺-Edge-1.1.2.zip and SHA256SUMS.txt from the [Release](https://github.com/power32m/fund-note/releases/tag/edge-v1.1.2). Verify the hash, extract, open edge://extensions, enable developer mode and choose Load unpacked. Select the folder directly containing manifest.json. Fresh installs are empty and need no application account.
+Download FundNote-Edge-1.1.2.zip and SHA256SUMS.txt from the [Release](https://github.com/power32m/fund-note/releases/tag/edge-v1.1.2). Verify the hash, extract, open edge://extensions, enable developer mode and choose Load unpacked. Select the folder directly containing manifest.json. Fresh installs are empty and need no application account.
 
 Export CSV before updating. For an existing unpacked installation, retain the directory, replace runtime files and reload; do not uninstall first. A different extension ID, browser or profile may require CSV migration. Automatic GitHub Source code archives contain documentation only and cannot be installed. The 1.0 package remains historical.
 

@@ -2,9 +2,9 @@
 
 官方仓库：https://github.com/power32m/fund-note 。当前下载包为Edge 1.1.2；商店提交不等于通过审核。
 
-仅下载对应Release的“基金小笺-Edge-1.1.2.zip”和SHA256SUMS.txt。解压后manifest.json直接位于安装目录内。GitHub自动生成的Source code包只含文档，不能安装。
+仅下载对应Release的“FundNote-Edge-1.1.2.zip”和SHA256SUMS.txt。解压后manifest.json直接位于安装目录内。GitHub自动生成的Source code包只含文档，不能安装。
 
-在PowerShell运行 Get-FileHash -LiteralPath '.\基金小笺-Edge-1.1.2.zip' -Algorithm SHA256 并与校验文件比较。校验只能发现文件差异，不能独立保证软件安全。核对名称、版本及仅新浪/东方财富两个行情域名权限。不需要管理员权限、账号密码或关闭安全软件。
+在PowerShell运行 Get-FileHash -LiteralPath '.\FundNote-Edge-1.1.2.zip' -Algorithm SHA256 并与校验文件比较。校验只能发现文件差异，不能独立保证软件安全。核对名称、版本及仅新浪/东方财富两个行情域名权限。不需要管理员权限、账号密码或关闭安全软件。
 
 首次为空持仓。不要分享个人浏览器配置、CSV或真实资产截图。更新前导出CSV；相同目录覆盖后重新加载，不要先卸载。浏览器或扩展ID变化可能需要CSV迁移。旧缓存可能保留在本地备份中；卸载不删除导出文件。
 
