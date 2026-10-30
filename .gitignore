@@ -1,0 +1,10 @@
+# Only public documentation and screenshots belong in this repository.
+*.zip
+*.exe
+*.crx
+*.pem
+*.csv
+node_modules/
+chrome-extension/
+*profile*/
+.env*
